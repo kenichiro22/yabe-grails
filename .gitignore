@@ -4,3 +4,6 @@
 .settings/
 yabe.iml
 target/
+out/
+stacktrace.log
+yabe-grailsPlugins.iml
