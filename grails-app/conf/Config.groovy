@@ -63,6 +63,7 @@ grails.hibernate.cache.queries = true
 environments {
     development {
         grails.logging.jul.usebridge = true
+        grails.resources.processing.enabled = false
     }
     production {
         grails.logging.jul.usebridge = false
