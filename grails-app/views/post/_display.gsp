@@ -1,6 +1,6 @@
 <div class="post ${_as == 'teaser' ? 'teaser' : ''}">
     <h2 class="post-title">
-        <g:link action="show" params="[id: _post.id]">${_post.title}</g:link>
+        <g:link controller="post" action="show" params="[id:_post.id]">${_post.title}</g:link>
     </h2>
     <div class="post-metadata">
         <span class="post-author">by ${_post.author.fullname}</span>,

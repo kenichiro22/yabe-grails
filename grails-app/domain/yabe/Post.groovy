@@ -15,4 +15,20 @@ class Post {
 
     static constraints = {
     }
+
+    Post previous() {
+        def query = Post.where {
+            lt('postedAt', this.postedAt)
+        }
+
+        return query.find(sort: 'postedAt', order: 'desc', max: 1) ?: null
+    }
+
+    Post next() {
+        def query = Post.where {
+            gt('postedAt', this.postedAt)
+        }
+        return query.find(sort: 'postedAt', order: 'asc', max: 1) ?: null
+    }
+
 }

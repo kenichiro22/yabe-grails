@@ -10,6 +10,25 @@ import grails.test.mixin.*
 @TestFor(Post)
 class PostTests {
 
+    void testGetPrevNext(){
+        mockDomain(User)
+
+        def bob = new User(email: "bob@gmail.com", password: "secret", fullname: "Bob").save()
+        def bobPost3 = new Post(content: "Hello world", title: "My third post", postedAt: Date.parse("yyyy-MM-dd", "2012-01-03") , author: bob).save()
+        def bobPost2 = new Post(content: "Hello world", title: "My second post", postedAt: Date.parse("yyyy-MM-dd", "2012-01-02") , author: bob).save()
+        def bobPost1 = new Post(content: "Hello world", title: "My first post", postedAt: Date.parse("yyyy-MM-dd", "2012-01-01") , author: bob).save()
+
+        assert bobPost3.previous().title == "My second post"
+        assert bobPost3.next() == null
+
+        assert bobPost2.previous().title == "My first post"
+        assert bobPost2.next().title == "My third post"
+
+        assert bobPost1.next().title == "My second post"
+        assert bobPost1.previous() == null
+
+    }
+
     void testUseTheCommentsRelation() {
         mockDomain(User)
         mockDomain(Comment)

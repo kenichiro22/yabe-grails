@@ -1,25 +1,27 @@
 <!doctype html>
 <html>
-	<head>
-		<meta name="layout" content="main"/>
-		<title>Home</title>
-	</head>
-	<body>
-    <g:if test="${frontPost}">
-        <g:render template="display" model="[as : 'home', _post: frontPost]"></g:render>
-        <g:if test="${olderPost.size() > 1}">
-        <div class="older-posts">
-            <h3>Older posts <span class="from">from this blog</span></h3>
-            <g:each in="${olderPost}" var="oldPost">
-                <g:render template="display" model="[as : 'teaser', _post: oldPost]"></g:render>
-            </g:each>
-        </div>
-        </g:if>
+<head>
+    <meta name="layout" content="main"/>
+    <title>${post.title}</title>
+</head>
+
+<body>
+<ul id="pagination">
+    <g:if test="${post.previous()}">
+        <li id="previous">
+            <g:link action="show" params="[id : post.previous().id]">
+                ${post.previous().title}
+            </g:link>
+        </li>
     </g:if>
-    <g:else>
-        <div class="empty">
-            There is currently nothing to read here.
-        </div>
-    </g:else>
-	</body>
+    <g:if test="${post.next()}">
+        <li id="next">
+            <g:link action="post" params="[id : post.next().id]">
+                ${post.next().title}
+            </g:link>
+        </li>
+    </g:if>
+</ul>
+<g:render template="display" model="[_post: post, _as: 'full']"></g:render>
+</body>
 </html>

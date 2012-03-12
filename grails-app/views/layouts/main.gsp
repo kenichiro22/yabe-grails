@@ -32,7 +32,9 @@
     <div id="title">
         <span class="about">About this blog</span>
 
-        <h1><a href="#"><g:message code="blog.title"/></a></h1>
+        <h1>
+            <g:link action="index"><g:message code="blog.title"/></g:link>
+        </h1>
 
         <h2><g:message code="blog.baseline"/></h2>
     </div>
