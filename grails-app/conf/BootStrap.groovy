@@ -32,8 +32,8 @@ class BootStrap {
                     business situation, and business rules. State that reflects the business situation
                     is controlled and used here, even though the technical details of storing it are
                     delegated to the infrastructure. This layer is the heart of business software.
-            """, postedAt: Date.parse("yyyy-MM-dd", "2012-01-01"), author: users[0]),
-                new Post(id: 2, title: "Just a test of YABE", content: "Well, it's just a test.", postedAt: Date.parse("yyyy-MM-dd", "2012-01-02"), author: users[0]),
+            """, postedAt: Date.parse("yyyy-MM-dd", "2012-01-03"), author: users[0]),
+                new Post(id: 2, title: "Just a test of YABE", content: "Well, it's just a test.", postedAt: Date.parse("yyyy-MM-dd", "2012-01-01"), author: users[0]),
                 new Post(id: 3, title: "The MVC Application !", content: """
                     A Play! application follows the MVC architectural pattern as applied to the
                     architecture of the Web.
@@ -41,7 +41,7 @@ class BootStrap {
                     This pattern splits the application into separate layers: the Presentation
                     layer and the Model layer. The Presentation layer is further split into a
                     View and a Controller layer.
-            """, postedAt: Date.parse("yyyy-MM-dd", "2012-01-03"), author: users[1])
+            """, postedAt: Date.parse("yyyy-MM-dd", "2012-01-02"), author: users[1])
         ]
         posts.each {p -> p.save()}
 
