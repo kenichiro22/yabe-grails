@@ -6,12 +6,12 @@
 	</head>
 	<body>
     <g:if test="${frontPost}">
-        <g:render template="display" model="[_as : 'home', _post: frontPost]"></g:render>
+        <g:render template="display" model="[as : 'home', _post: frontPost]"></g:render>
         <g:if test="${olderPost.size() > 1}">
         <div class="older-posts">
             <h3>Older posts <span class="from">from this blog</span></h3>
             <g:each in="${olderPost}" var="oldPost">
-                <g:render template="display" model="[_as : 'teaser', _post: oldPost]"></g:render>
+                <g:render template="display" model="[as : 'teaser', _post: oldPost]"></g:render>
             </g:each>
         </div>
         </g:if>

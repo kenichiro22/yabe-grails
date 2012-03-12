@@ -1,12 +1,11 @@
 <div class="post ${_as == 'teaser' ? 'teaser' : ''}">
     <h2 class="post-title">
-        <a href="#">${_post.title}</a>
+        <g:link action="show" params="[id: _post.id]">${_post.title}</g:link>
     </h2>
-
     <div class="post-metadata">
         <span class="post-author">by ${_post.author.fullname}</span>,
         <span class="post-date">${_post.postedAt.format('dd MMM yy')}</span>
-        <g:if test="_as == 'full'">
+        <g:if test="${_as == 'full'}">
             <span class="post-comments">
                 &nbsp;|&nbsp;
                 ${_post.comments.size() ?: 'no'}
@@ -17,14 +16,13 @@
             </span>
         </g:if>
     </div>
-    <g:if test="_as != 'teaser'">
+    <g:if test="${_as != 'teaser'}">
         <div class="post-content">
             ${_post.content.encodeAsHTML().replace("\n", "<br/>")}
         </div>
     </g:if>
 </div>
-
-<g:if test="_as == 'full'">
+<g:if test="${_as == 'full'}">
     <div class="comments">
         <h3>
             ${_post.comments.size() ?: 'no'}
@@ -45,6 +43,5 @@
                 </div>
             </div>
         </g:each>
-
     </div>
 </g:if>
