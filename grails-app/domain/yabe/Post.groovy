@@ -6,7 +6,7 @@ class Post {
     String content
     User author
 
-    static hasMany = [comments: Comment]
+    static hasMany = [comments: Comment, tags: Tag]
     static mapping = {
         content type: 'text'
 //        comments lazy: false
@@ -29,6 +29,21 @@ class Post {
             gt('postedAt', this.postedAt)
         }
         return query.find(sort: 'postedAt', order: 'asc', max: 1) ?: null
+    }
+
+    Post tagItWith(String tag){
+//        tags.add(Tag.findOrCreateByName(tag))
+//        return this
+        return addToTags(Tag.findOrCreateByName(tag))
+    }
+
+    static List findTaggedWith(String tag){
+        def c = Post.createCriteria()
+        return c.list {
+            tags {
+                eq("name", tag)
+            }
+        }
     }
 
 }

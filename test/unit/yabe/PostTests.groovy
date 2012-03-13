@@ -87,4 +87,25 @@ class PostTests {
         assert firstPost.postedAt != null
         assert firstPost.author == bob
     }
+
+    void testFindTaggedWith(){
+        mockDomain(User)
+        mockDomain(Tag)
+
+        def bob = new User(email: "bob@gmail.com", password: "secret", fullname: "Bob").save()
+        def bobPost = new Post(content: "Hello world", title: "My first post", postedAt: new Date(), author: bob).save()
+        def anotherBobPost = new Post(content: "Hello world", title: "My second post", postedAt: new Date(), author: bob).save()
+        
+        // Well
+        assert Post.findTaggedWith("Red").size() == 0
+
+        // Tag it now
+        bobPost.tagItWith("Red").tagItWith("Blue").save()
+        anotherBobPost.tagItWith("Red").tagItWith("Green").save()
+
+        // Check
+        assert Post.findTaggedWith("Red").size() == 2
+        assert Post.findTaggedWith("Blue").size() == 1
+        assert Post.findTaggedWith("Green").size() == 1
+    }
 }
