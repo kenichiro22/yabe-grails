@@ -12,6 +12,20 @@ import org.junit.*
 @Mock([Post, User])
 class CommentTests {
 
+    void testValidation(){
+        // Create a new post
+        def bob = new User(email: "bob@gmail.com", password: "secret", fullname : "Bob").save();
+        def bobPost = new Post(author: bob, title: "My first post", content: "Hello world", postedAt: new Date()).save();
+
+        Comment comment = new Comment(post: bobPost)
+        assert comment.validate() == false
+        println(comment.errors)
+
+        // addToComments validate doesn't work??
+//        bobPost.addToComments(author: "foo")
+//        assert bobPost.validate() == false
+    }
+
     void testPostComment() {
 
         // Create a new user and save it
