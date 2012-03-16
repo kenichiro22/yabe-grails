@@ -3,6 +3,7 @@ package yabe
 
 
 import grails.test.mixin.*
+import org.hibernate.FetchMode
 
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
@@ -10,13 +11,13 @@ import grails.test.mixin.*
 @TestFor(Post)
 class PostTests {
 
-    void testGetPrevNext(){
+    void testGetPrevNext() {
         mockDomain(User)
 
         def bob = new User(email: "bob@gmail.com", password: "secret", fullname: "Bob").save()
-        def bobPost3 = new Post(content: "Hello world", title: "My third post", postedAt: Date.parse("yyyy-MM-dd", "2012-01-03") , author: bob).save()
-        def bobPost2 = new Post(content: "Hello world", title: "My second post", postedAt: Date.parse("yyyy-MM-dd", "2012-01-02") , author: bob).save()
-        def bobPost1 = new Post(content: "Hello world", title: "My first post", postedAt: Date.parse("yyyy-MM-dd", "2012-01-01") , author: bob).save()
+        def bobPost3 = new Post(content: "Hello world", title: "My third post", postedAt: Date.parse("yyyy-MM-dd", "2012-01-03"), author: bob).save()
+        def bobPost2 = new Post(content: "Hello world", title: "My second post", postedAt: Date.parse("yyyy-MM-dd", "2012-01-02"), author: bob).save()
+        def bobPost1 = new Post(content: "Hello world", title: "My first post", postedAt: Date.parse("yyyy-MM-dd", "2012-01-01"), author: bob).save()
 
         assert bobPost3.previous().title == "My second post"
         assert bobPost3.next() == null
@@ -88,14 +89,14 @@ class PostTests {
         assert firstPost.author == bob
     }
 
-    void testFindTaggedWith(){
+    void testFindTaggedWith() {
         mockDomain(User)
         mockDomain(Tag)
 
         def bob = new User(email: "bob@gmail.com", password: "secret", fullname: "Bob").save()
         def bobPost = new Post(content: "Hello world", title: "My first post", postedAt: new Date(), author: bob).save()
         def anotherBobPost = new Post(content: "Hello world", title: "My second post", postedAt: new Date(), author: bob).save()
-        
+
         // Well
         assert Post.findTaggedWith("Red").size() == 0
 

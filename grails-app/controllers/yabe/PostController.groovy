@@ -7,8 +7,9 @@ class PostController {
                  olderPost: Post.list(sort: "postedAt", order: "desc", offset: 1, max: 10)]
     }
 
-    def show(){
-        return [post: Post.findById(params.id)]
+    def show(Long id){
+        println("show")
+        return [post: Post.findById(id)]
     }
 
     def postComment(String author, String content){
@@ -22,5 +23,10 @@ class PostController {
         else{
             render(view: 'show', model:[post: post, comment: c])
         }
+    }
+
+    def listTagged(){
+        println("listTagged")
+        render(view: 'listTagged', model: [tag: params.tag, posts : Post.findTaggedWith(params.tag)])
     }
 }

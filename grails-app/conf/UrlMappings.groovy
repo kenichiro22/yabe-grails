@@ -1,10 +1,15 @@
 class UrlMappings {
 
 	static mappings = {
-        "/post/$id/comments"(controller: "post"){
+        "/posts/$id/comments"(controller: "post"){
             action = [POST: 'postComment']
         }
-        "/post/$id"(controller: "post", action: "show")
+        "/posts/$id"(controller: "post", action: "show"){
+            constraints {
+                id(matches: /\d+/)
+            }
+        }
+        "/posts/$tag"(controller: "post", action: "listTagged")
 
 		"/$controller/$action?/$id?"{
 			constraints {

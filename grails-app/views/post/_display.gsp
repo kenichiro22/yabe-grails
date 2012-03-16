@@ -14,6 +14,16 @@
                     , latest by ${_post.comments.toList().get(0).author}
                 </g:if>
             </span>
+            <g:if test="${_post.tags}">
+                <span class="post-tags">
+                    - Tagged
+                    <g:each in="${post.tags}" var="tag">
+                        <g:link action="listTagged" params="[tag : tag.name]">
+                            ${tag.name}
+                        </g:link>
+                    </g:each>
+                </span>
+            </g:if>
         </g:if>
     </div>
     <g:if test="${_as != 'teaser'}">

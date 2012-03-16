@@ -1,6 +1,7 @@
 import yabe.User
 import yabe.Post
 import yabe.Comment
+import yabe.Tag
 
 class BootStrap {
 
@@ -15,6 +16,14 @@ class BootStrap {
     }
 
     def initData = {
+        def tags = [
+                new Tag(name: "Grails"),
+                new Tag(name: "Architecture"),
+                new Tag(name: "Test"),
+                new Tag(name: "MVC")
+        ]
+        tags.each {t -> t.save()}
+
         def users = [
                 new User(id: 1, email: "bob@gmail.com", password: "secret", fullname: "Bob", isAdmin: false),
                 new User(id: 2, email: "jef@gmail.com", password: "secret", fullname: "Jef", isAdmin: false)]
@@ -41,7 +50,7 @@ class BootStrap {
                     This pattern splits the application into separate layers: the Presentation
                     layer and the Model layer. The Presentation layer is further split into a
                     View and a Controller layer.
-            """, postedAt: Date.parse("yyyy-MM-dd", "2012-01-02"), author: users[1])
+            """, tags: [tags[0],tags[1],tags[3]], postedAt: Date.parse("yyyy-MM-dd", "2012-01-02"), author: users[1])
         ]
         posts.each {p -> p.save()}
 
